@@ -6,9 +6,13 @@
 
 ### Introduction 
 
-This project is aimed to develop an application to visualize single/multiple Xandar Kardian people counting sensors detection result for a indoor area. The application user interface contents chart pages to show the sensor detection history, a top-view of the monitoring area to show the people density and a config page for upload the data into the control center. 
+This project is aimed to create an application to visualize single/multiple Xandar Kardian people counting sensors detection result for a indoor area as shown below. 
 
-Xandar Kardian people counting sensors : https://www.xkcorp.com/
+![](doc/img/function.png)
+
+The application user interface contents chart pages to show the sensor detection history, a top-view of the monitored indoor area to show the people density and a config page for upload the data into the control center. 
+
+Xandar Kardian people counting sensors introduction : https://www.xkcorp.com/
 
 ##### Application UI View
 
@@ -22,29 +26,37 @@ Xandar Kardian people counting sensors : https://www.xkcorp.com/
 
 ### Program Design
 
-The application contents three main pages: 
+The application user interface contents three main pages: 
 
-##### Data visualization dashboard
 
-We will show the currently detection people count, average people count and finial normalized people count in a chart with different line color. We will also list sensor ID, connection interface, current data index in data queue (sequence number) and add a pause button to let the user can check the data. When the user press "Detail" button, a parameter display panel will show on the right to show the entire 36 parameters can read from the  Xandar Kardian sensor. 
 
-The user can also switch among different sensors by click the tab, the data visualization dashboard is shown below: 
+##### Sensor data visualization dashboard
+
+We will show the current detection people count number, average people count number and finial normalized people count number in a chart with different color lines . We will also list `sensor ID`, `connection interface`, `current data index in data queue` (sequence number) and add a "Pause" button to let the user can stop the UI updating and check the data. When the user press "Detail >>" button, a parameter display panel will show on the right to show the entire 36 parameters can be read from the  Xandar Kardian sensor. 
+
+The user can also switch among different sensors by click the top tab, the data visualization dashboard is shown below: 
 
 ![](doc/img/2019-06-26_175341.png)
 
-##### Top view monitoring are visualization dashboard 
 
-We will show a top view map for the monitoring area and the connection information of different sensors as shown below: 
+
+##### Top view monitored area visualization dashboard 
+
+We will show a top view map for the monitored indoor area and the connection information of different sensors in this dashboard (Muti-Info tab):
 
 ![](doc/img/2019-06-26_174423.png)
 
+The map is shown on the left, sensor connection and sensor feed back data are shown on the right side. 
+
+
+
 ##### Control-Hub report config page
 
-If we install several app in an indoor area we can config a hub and connect all the apps to report the data to the hub. The user can register the app to the hub with a unique signature. The detail is shown below:
+If we install several app with multiple sensors in an indoor area we can config a hub and connect all the apps/sensors to report the data to the hub. One app can control max 4 sensors. The user can register the app to the hub with a unique signature. The detail is shown below:
 
 ![](doc/img/2019-06-26_174443.png)
 
-
+=> Select the control Hub IP you want to connect, create a signature for the current App and click the sensor registration button.  
 
 
 
@@ -66,17 +78,17 @@ If we install several app in an indoor area we can config a hub and connect all 
 
 ###### Hardware Needed: Xandar Kardian
 
-![](doc/img/sensor.jpg)
+![](doc/img/sensor.png)
 
 ###### Program Files List 
 
-| Program File            | Execution Env | Description                           |
-| ----------------------- | ------------- | ------------------------------------- |
-| src/XAKAsensorRd.py     | python 3      | main UI frame                         |
-| src/XAKAsensorPanel.py  | python 3      | UI function panels module.            |
-| src/XAKAsensorComm.py   | python 3      | Sensor communication interface module |
-| src/XAKAsensorGlobal.py | python 3      | Global parameters module              |
-| src/img                 |               | image folder used by the program      |
+| Program File            | Execution Env | Description                            |
+| ----------------------- | ------------- | -------------------------------------- |
+| src/XAKAsensorRd.py     | python 3      | Application main UI frame.             |
+| src/XAKAsensorPanel.py  | python 3      | UI function panels module.             |
+| src/XAKAsensorComm.py   | python 3      | Sensor communication interface module. |
+| src/XAKAsensorGlobal.py | python 3      | Global parameters module.              |
+| src/img                 |               | Image folder used by the program       |
 
 version: V_2.1
 
