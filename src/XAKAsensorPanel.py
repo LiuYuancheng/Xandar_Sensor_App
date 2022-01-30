@@ -281,7 +281,7 @@ class PanelDetailInfo(wx.Panel):
             print("PanelDetailInfo: The input data list element missing %d", len(dataList))
             return
         for i, value in enumerate(dataList): 
-            self.valueDispList[i].SetLabel(str(value))
+            self.valueDispList[i].SetLabel("{:.3f}".format(value))
 
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------

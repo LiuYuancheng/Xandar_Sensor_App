@@ -23,36 +23,37 @@ from functools import partial
 
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+
 class simuSerialPort(object):
     """ module used to simulate a COMM port interface."""
+
     def __init__(self, preSavedData=None) -> None:
-        self.savedData = preSavedData
         self.dataHeader = b''
         self.chunkSize = 100
+        self.savedData = preSavedData
 
     def setChunk(self, header, chunkSize):
         self.dataHeader = header
         self.chunkSize = chunkSize
 
     def read(self, byteNum):
-        
-        iterN = max(1,byteNum//self.chunkSize)
+        """ return number of bytes simulate the serial read() function."""
+        iterN = max(1, byteNum//self.chunkSize)
         dataByte = b''
         for _ in range(iterN):
             data = self.dataHeader + pack('i', 0) + pack('i', random.randint(0, 15))
             for i in range(35):
-                data+=pack('f', random.uniform(1.5, 5.0))
+                data += pack('f', random.uniform(1.5, 7.0))
+                #data += pack('f', float("{:.2f}".format(random.randint(0, 15))))
             dataByte += data
-        print()
-        
+        #print('read: %s' %str(dataByte))
         return dataByte
 
-    def write(self,byteData):
+    def write(self, byteData):
         self.savedData = byteData
 
     def close(self):
         self.savedData = None
-
 
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
@@ -60,11 +61,11 @@ class XAKAsensorComm(object):
 
     def __init__(self, commPort, simuMd=False) -> None:
         self.serComm = None
-        self.serialPort = commPort
-        self.simuMd = simuMd    # simulation mode flag
+        self.serialPort = commPort  # the serial port name we are going to read.
+        self.simuMd = simuMd        # simulation mode flag
         self.dataList = [] 
 
-
+#-----------------------------------------------------------------------------
     def setSerialComm(self, searchFlag=False):
         """ Automatically search for the sensor and do the connection."""
         if not self.serComm is None:
@@ -109,6 +110,7 @@ class XAKAsensorComm(object):
             print("Serial connection: serial port open error.")
             return False
 
+#-----------------------------------------------------------------------------
     def fetchSensorData(self):
         # load data from the sensor
         if self.serComm is None: 
@@ -117,7 +119,6 @@ class XAKAsensorComm(object):
         else:
             output = self.serComm.read(500) # read 500 bytes and parse the data.
             bset = output.split(b'XAKA')    # begine byte of the bytes set.
-            print(bset)
             for item in bset:
                 # 4Bytes*37 = 148 paramters make sure the not data missing.
                 if len(item) == 148:
@@ -130,16 +131,20 @@ class XAKAsensorComm(object):
                 print("Please check the sensor connection.")
                 return
 
+#-----------------------------------------------------------------------------
     def getData(self):
         return self.dataList
 
-
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 def testCase(mode=0):
     if mode == 0:
         serComm = XAKAsensorComm('COM0', simuMd=True)
         serComm.setSerialComm()
         serComm.fetchSensorData()
         print(serComm.getData())
+    else:
+        print("Put your test code here:")
 
 if __name__ == '__main__':
     #testCase()
