@@ -14,11 +14,7 @@
 # License:     YC @ NUS
 #-----------------------------------------------------------------------------
 
-import io, sys
-import platform
 import wx # use wx to build the UI.
-
-from Constants import BUFFER_SIZE
 
 #In this project we remove the firmware attestation part.
 #import firmwMsgMgr
@@ -178,11 +174,14 @@ class SensorReaderFrame(wx.Frame):
         self.Destroy()
 
 #-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 class MyApp(wx.App):
     """ Init the frame and run the application"""
     def OnInit(self):
         mainFrame = SensorReaderFrame(None, -1, gv.APP_NAME)
         mainFrame.Show(True)
         return True
+
+#-----------------------------------------------------------------------------
 app = MyApp(0)
 app.MainLoop()

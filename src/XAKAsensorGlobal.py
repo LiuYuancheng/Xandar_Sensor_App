@@ -41,13 +41,6 @@ LOCAL_IP = '127.0.0.1'
 SITCP_PORT = 5005   # port for firmware sign request.
 RGTCP_PORT = 5006   # port for sensor registration request.
 
-# Firmware sign server choice:
-SI_SERVER_CHOICE = {
-    "LocalDefault [127.0.0.1]"  : ('127.0.0.1', SITCP_PORT),
-    "Server_1 [192.168.0.100]"  : ('192.168.0.100', SITCP_PORT),
-    "Server_2 [192.168.0.101]"  : ('192.168.0.101', SITCP_PORT)
-}
-
 #-----------------------------------------------------------------------------
 # Set the global reference here.
 iChartPanel = None      # History chart panel
