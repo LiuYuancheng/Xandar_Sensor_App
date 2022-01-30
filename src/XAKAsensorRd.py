@@ -43,7 +43,7 @@ class SensorReaderFrame(wx.Frame):
         # Init the UI.
         self.SetSizer(self.buildUISizer())
         self.statusbar = self.CreateStatusBar(1)
-        self.statusbar.SetStatusText('Regist the connected sensor first.')
+        self.statusbar.SetStatusText('Register the connected sensor first.')
         # Init the SSL client to TLS connection.
         #self.sslClient = SSLC.TLS_sslClient(self)  # ssl client to send the sensor signature.
         # Init the message manager.
@@ -95,7 +95,7 @@ class SensorReaderFrame(wx.Frame):
             self.sslClient.connect((ip, port))
             # Send SSL connection request cmd and get response.
             self.sslClient.send(self.msgMgr.dumpMsg(action='CR'))
-            dataDict = self.msgMgr.loadMsg(self.sslClient.recv(BUFFER_SIZE))
+            dataDict = self.msgMgr.loadMsg(self.sslClient.recv(gv.BUFFER_SIZE))
             if dataDict['act'] == 'HB' and dataDict['lAct'] == 'CR' and dataDict['state']:
                 print("SConnetion: Connect to the server succesfully.")
             else:
@@ -105,7 +105,7 @@ class SensorReaderFrame(wx.Frame):
             # Register the sensor.(Temporary hard code the sigature for test.)
             data = (self.senId, SENSOR_TYPE, self.version, self.signature)
             self.sslClient.send(self.msgMgr.dumpMsg(action='RG', dataArgs=data))
-            dataDict = self.msgMgr.loadMsg(self.sslClient.recv(BUFFER_SIZE))
+            dataDict = self.msgMgr.loadMsg(self.sslClient.recv(gv.BUFFER_SIZE))
             if dataDict['act'] == 'HB' and dataDict['lAct'] == 'RG' and dataDict['state']:
                 self.statusbar.SetStatusText("Sensor registration success.")
                 self.activeFlag = True

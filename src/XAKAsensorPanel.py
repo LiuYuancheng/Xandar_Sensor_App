@@ -67,6 +67,7 @@ CHART_LABEL_LIST = [
     'Average_PP:',  # float
     'Final_PNUM:'   # float
 ]
+
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 class PanelPlaceHolder(wx.Panel):
@@ -80,18 +81,18 @@ class PanelPlaceHolder(wx.Panel):
 #-----------------------------------------------------------------------------
 class PanelBaseInfo(wx.Panel):
     """ Panel to display the basic sensor information and pop up the detail sensor
-        information window if the user clicked the detail button.
+        information window if the user clicked the <detail> button.
     """
     def __init__(self, parent):
         wx.Panel.__init__(self, parent, size=(100, 300))
         self.SetBackgroundColour(wx.Colour(200, 210, 200))
         self.valueDispList = [] # Follow the sequence in <CHART_LABEL_LIST>
         self.infoWindow = None  # window to show the detail information.
-        self.SetSizer(self.buildUISizer())
+        self.SetSizer(self._buildUISizer())
         self.Show(True)
 
 #--PanelBaseInfo---------------------------------------------------------------
-    def buildUISizer(self):
+    def _buildUISizer(self):
         """ Init the panel UI and return the sizer."""
         flagsR = wx.RIGHT | wx.CENTER
         sizer = wx.BoxSizer(wx.VERTICAL)
@@ -121,7 +122,7 @@ class PanelBaseInfo(wx.Panel):
             
 #--PanelBaseInfo---------------------------------------------------------------
     def pauseUpdate(self, event):
-        """ Start/Pause the update of the chart display."""
+        """ Start/Pause the update of the history chart display."""
         buttonLb = event.GetEventObject().GetLabel()
         if 'Pause' in buttonLb:
             self.pauseBt.SetLabel('Start >|'.rjust(10))
@@ -251,10 +252,10 @@ class PanelDetailInfo(wx.Panel):
         self.SetBackgroundColour(wx.Colour(200, 200, 200))
         self.parent = parent
         self.valueDispList = []     # Label list will display on UI.
-        self.SetSizer(self.buildUISizer())
+        self.SetSizer(self._buildUISizer())
 
 #--PanelDetailInfo----------------------------------------------------------------
-    def buildUISizer(self):
+    def _buildUISizer(self):
         """ Build the panel main UI and return the wx sizer"""
         sizer = wx.GridSizer(len(DETAIL_LABEL_LIST)+4, 2, 4, 4)
         # Add the title line.
