@@ -93,7 +93,7 @@ class PanelBaseInfo(wx.Panel):
 #--PanelBaseInfo---------------------------------------------------------------
     def buildUISizer(self):
         """ Init the panel UI and return the sizer."""
-        flagsR = wx.RIGHT | wx.ALIGN_CENTER_VERTICAL
+        flagsR = wx.RIGHT | wx.CENTER
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.AddSpacer(20)
         # Information rows
@@ -384,7 +384,7 @@ class PanelMultInfo(wx.Panel):
     def buidUISizer(self):
         """ Build the UI with 2 columns.left: Map, right: sensor data Grid."""
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        flagsT, flagsR = wx.RIGHT, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL
+        flagsT, flagsR = wx.RIGHT, wx.RIGHT | wx.CENTER
         sizer.AddSpacer(5)
         # Column idx = 0 Map panel.
         gv.iMapPanel = self.mapPanel = PanelMap(self)
@@ -473,7 +473,7 @@ class PanelSetup(wx.Panel):
         """ Init the panel."""
         wx.Panel.__init__(self, parent, size=(350, 300))
         self.SetBackgroundColour(wx.Colour(200, 210, 200))
-        flagsT, flagsR = wx.RIGHT, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL
+        flagsT, flagsR = wx.RIGHT, wx.RIGHT | wx.CENTER
         vsizer = wx.BoxSizer(wx.VERTICAL)
         vsizer.AddSpacer(10)
         # Row idx = 0: Sensor firmware registration part:
